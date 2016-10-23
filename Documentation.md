@@ -1,6 +1,7 @@
 See also [Readme](README.md).
 
-Most examples shown in this document are found in
+[Working](https://travis-ci.org/johannesgerer/Enhance) versions of
+most code examples given in this document are found in
 [`tests/tests.cpp`](tests/tests.cpp).
 
 **Everything is in the `enhance` namespace!**
@@ -182,9 +183,9 @@ handling like `range`.
 ## 3.1 Dynamic Ranges
 
 In order to access the values of an iterable container, use the
-`range(from, to)` modifier, taking two arguments `from` and `to`. All
-elements between `from` and (excluding) `to` will be accessed in
-order. Example:
+`range(from, to)` modifier, taking two accessors, `from` and `to`, as
+arguments. All elements between `from` and (excluding) `to` will be
+accessed in order. Example:
 
 ```c++
 struct Vector : Insertable<'<',',',' ','>',Vector,false>{
@@ -394,7 +395,7 @@ references to the objects to be multiplied:
 
 | Combiner | Factory | Inheritable |
 |---|---|---|
-| `ScalarProduct<Scalar, T>` | `scalarProduct` | `WithScalarProduct::operator*` |
+| `ScalarProduct<Scalar, T>` | `scalarProduct` | `WithScalarProduct<T>::operator*` |
 
 ```c++
   Point2D v{2,3}, w{20,30};
@@ -513,11 +514,11 @@ TEST_CASE( "hash" ) {
 
 ## 4.5 Serialization
 
-This is module adopts the conventions from the
+This module adopts the conventions from the
 [Boost.Serialization](http://www.boost.org/doc/libs/1_62_0/libs/serialization/doc/index.html)
 library. The `Serializable` class defines a `serialize` function that
-when passed a *saving* (*loading*) archive `ar` applies `ar <<` (or `ar >>`)
-iteratively to all accessors.
+when passed a *saving* (*loading*) archive `ar` applies `ar <<` (or
+`ar >>`) iteratively to all accessors.
 
 The combiner's constructor and factory functions take one reference of
 the object that will be serialized (loaded/saved) and a reference of
@@ -581,6 +582,8 @@ results separated by `s1s2`, all of which are of type `char`.
 
 `bool Group` specifies, whether [`range` accessors](#3-accessors) are
 themselves enclosed in `d1` and `d2`.
+  
+For *code examples* search this document for the use of `Insertable`.
   
 Sometimes, it is easier to simply get a string with the following
 helper function:

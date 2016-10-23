@@ -1,30 +1,44 @@
 # C++ Enhance [![Build Status](https://travis-ci.org/johannesgerer/Enhance.svg?branch=master)](https://travis-ci.org/johannesgerer/Enhance)
 
-... is a single-header C++ library, that provides tools for
-automatic derivation of zero-overhead class enhancements, such as
-comparison/assignment operators, hash/swap/serialization/pretty
-printing functions and much more.
+... is a *single-header* C++ library that will save you hours of coding and
+unnecessary complexity.
+
+It automates the derivation of class enhancements such as
+* comparison operators
+* assignment operators
+* hash functions
+* swap functions
+* serialization
+* pretty printing
+* much, much more is possible. (See [documentation and examples](Documentation.md))
 
 Writing these by hand is cumbersome and repetitive, as they usually
 all involve the same fields of the class. Handwritten implementations
 are error prone and a hassle to keep up-to-date.
 
-*Enhance* endows classes with the enhancements listed above by
-inheritance. The only thing that needs to be specified is the list of
-member variables or other [accessors](Documentation.md#2-accessors). If the class
-definition cannot be altered, non-intrusive versions are also
-available.
+*Enhance* achieves this by class inheritance. The only thing that
+needs to be specified is the list of member variables or other
+[accessors](Documentation.md#2-accessors) that should be used in the
+enhancement. If the class definition cannot be altered,
+*non-intrusive* versions are also available.
 
-This is achieved in pure templated C++ without the use of
-macros. There are a few macros built on top of `Enhance`'s core
-functionality, provided for such cases where inheritance is not
+
+#### What's the runtime overhead?
+
+Zero.
+
+Aggressive compiler optimizations (like `g++ -O2`) should eliminate
+any overhead caused by *Enhance* compared to a manual implementation,
+as it basically only shuffles pointers and references around in ways
+that are known at compile time (e.g. through the use of static
+polymorphism).
+
+#### Is all this achieved using MACRO magic that is hard to debug?
+No macros, just pure templated C++.
+
+There are a few simple macros built on top of `Enhance`'s core
+functionality for convenience in cases where inheritance is not
 possible (like specializing `std::hash`).
-
-*Zero-overhead:* Aggressive compiler optimizations (like `g++ -O2`)
-should eliminate any overhead caused by *Enhance* compared to a manual
-implementation, as it basically only shuffles pointers and references
-around in ways that are known at compile time.
-
 
 # 1 Installation
 
@@ -36,7 +50,8 @@ path or tell the compiler where to find it (e.g. `g++
 # 2 Basic Usage
 
 In the most basic use case, the class to be enhanced needs a template
-member function `enhance` taking one argument, which gets passed all
+member function `enhance` taking one argument — the so called
+*[combiner](Documentation.md#4-modules)* — which gets passed all
 fields that should be used to build up the enhancements. As an example
 take a class `Point2D` describing points in the two dimensional plane:
 
@@ -89,17 +104,18 @@ int main(){
 
 ```
 
-More examples of working code (including examples from this README)
-are found in the unorganized collection of [tests](tests/tests.cpp).
+More examples of working code are found in the
+[documentation](Documentation.md) and in the unorganized collection of
+[tests](tests/tests.cpp).
 
 # 3 Tutorial
 
 See http://johannesgerer.com/enhance for a **tutorial** demonstrating
 many features of Enhance.
 
-# 5 Documentation can be found [here](Documentation.md)
+# 4 Documentation and Examples can be found [here](Documentation.md)
 
-# 4 Extension
+# 5 Extension
 
 The core concept implemented in *Enhance* is very flexible and the
 current set of modules by no means captures everything that is
