@@ -11,7 +11,7 @@ are error prone and a hassle to keep up-to-date.
 
 *Enhance* endows classes with the enhancements listed above by
 inheritance. The only thing that needs to be specified is the list of
-member variables or other [accessors](#52-accessors). If the class
+member variables or other [accessors](Documentation.md#2-accessors). If the class
 definition cannot be altered, non-intrusive versions are also
 available.
 
