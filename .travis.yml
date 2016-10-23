@@ -1,0 +1,17 @@
+language: cpp
+script: cd tests && make debug
+sudo: required
+dist: trusty
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - clang
+    - libboost-serialization-dev
+compiler:
+  - clang
+  - gcc
+install:
+- if [ "$CXX" = "g++" ]; then sudo apt-get install gcc-6 g++-6; export CXX="g++-6" CC="gcc-6"; fi
+- $CXX --version
